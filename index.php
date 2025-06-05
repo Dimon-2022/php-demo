@@ -10,12 +10,38 @@
 <body>
 
 <?php
-$name = 'Dima';
-$surname = 'test';
+$books = [
+  [
+    'name' => 'Book 1',
+    'author' => 'Author 1',
+    'purchaseUrl' => 'https://unian.net',
+  ],
+   [
+    'name' => 'Book 2',
+    'author' => 'Author 2',
+    'purchaseUrl' => 'https://unian.net',
+  ],
+   [
+    'name' => 'Book 3',
+    'author' => 'Author 3',
+    'purchaseUrl' => 'https://unian.net',
+  ]
 
-echo "$name $surname";
-
+];
 ?>
+
+<h1>Recomended books:</h1>
+<ul>
+  <?php
+  foreach($books as $book):?>
+    <li>
+    <a href="<?php echo $book['purchaseUrl'];?>"><?php echo $book['author'];?></a>
+      <?php echo $book['name'];?>
+    </li>
+  <?php endforeach; ?>
+ 
+</ul>
+
 
 </body>
 
