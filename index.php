@@ -10,35 +10,72 @@
 <body>
 
 <?php
-$books = [
-  [
-    'name' => 'Book 1',
-    'author' => 'Author 1',
-    'purchaseUrl' => 'https://unian.net',
-  ],
-   [
-    'name' => 'Book 2',
-    'author' => 'Author 2',
-    'purchaseUrl' => 'https://unian.net',
-  ],
-   [
-    'name' => 'Book 3',
-    'author' => 'Author 3',
-    'purchaseUrl' => 'https://unian.net',
-  ]
+include_once './functions.php';
 
+$books = [
+    [
+        'name' => 'Book 1',
+        'author' => 'Author 1',
+        'purchaseUrl' => 'https://unian.net',
+    ],
+    [
+        'name' => 'Book 2',
+        'author' => 'Author 1',
+        'purchaseUrl' => 'https://unian.net',
+    ],
+    [
+        'name' => 'Book 3',
+        'author' => 'Author 3',
+        'purchaseUrl' => 'https://unian.net',
+    ],
+    [
+        'name' => 'Book 1',
+        'author' => 'Author 3',
+        'purchaseUrl' => 'https://unian.net',
+    ],
+    [
+        'name' => 'Book 2',
+        'author' => 'Author 4',
+        'purchaseUrl' => 'https://unian.net',
+    ],
+    [
+        'name' => 'Book 3',
+        'author' => 'Author 5',
+        'purchaseUrl' => 'https://unian.net',
+    ],
+    [
+        'name' => 'Book 1',
+        'author' => 'Author 6',
+        'purchaseUrl' => 'https://unian.net',
+    ],
+    [
+        'name' => 'Book 2',
+        'author' => 'Author 7',
+        'purchaseUrl' => 'https://unian.net',
+    ],
+    [
+        'name' => 'Book 3',
+        'author' => 'Author 8',
+        'purchaseUrl' => 'https://unian.net',
+    ],
 ];
+
 ?>
 
 <h1>Recomended books:</h1>
 <ul>
   <?php
-  foreach($books as $book):?>
+
+  $filteredBooks = filterByAuthor($books, 'Author 3');
+// var_dump($filteredBooks);
+// die();
+
+foreach ($filteredBooks as $book) { ?>
     <li>
-    <a href="<?php echo $book['purchaseUrl'];?>"><?php echo $book['author'];?></a>
-      <?php echo $book['name'];?>
+    <a href="<?php echo $book['purchaseUrl']; ?>"><?php echo $book['author']; ?></a>
+      <?php echo $book['name']; ?>
     </li>
-  <?php endforeach; ?>
+  <?php } ?>
  
 </ul>
 
