@@ -6,6 +6,15 @@ require 'functions.php';
 // connect to MySQL database.
 require 'Database.php';
 
-$db = new Database();
+$config = require 'config.php';
 
-$post = $db->query('SELECT * FROM posts WHERE id=1;');
+
+$db = new Database($config['database']);
+
+$id = $_GET['id'];
+
+$query = "SELECT * FROM posts WHERE id= ?";
+
+
+$posts = $db->query($query, [$id])->fetch();
+dd($posts);
