@@ -11,8 +11,8 @@ require 'partials/banner.php';
       <?php
       foreach ($notes as $note) { ?>
         <li>
-          <a class="text-blue-500 hover:underline" href="http://demo.loc/note?id=<?php echo $note['id'];?>">
-            <?php echo $note['body']; ?>
+          <a class="text-blue-500 hover:underline" href="http://demo.loc/note?id=<?php echo $note['id']; ?>">
+            <?php echo htmlspecialchars($note['body']); ?>
           </a>
         </li>
       <?php }?>
