@@ -1,11 +1,12 @@
 <?php
 
-$config = require 'config.php';
+$config = require base_path('config.php');
 $db = new Database($config['database']);
 
 $query = 'SELECT * FROM notes';
 $notes = $db->query($query)->get();
 
-$heading = 'My notes';
-
-require 'views/notes/index.view.php';
+view('notes/index.view.php', [
+    'heading' => 'My Notes',
+    'notes' => $notes,
+]);
