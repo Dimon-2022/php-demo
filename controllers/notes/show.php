@@ -1,17 +1,33 @@
 <?php
 
-$config = require  base_path('config.php');
+use Core\Database;
+
+$config = require base_path('config.php');
 $db = new Database($config['database']);
-$id = $_GET['id'];
-
-$query = 'SELECT * FROM notes WHERE id=:id';
-$note = $db->query($query, ['id' => $id])->findOrFail();
-
 $currentUserId = 1;
 
-authorize($note['user_id'] === $currentUserId);
+if ('POST' === $_SERVER['REQUEST_METHOD']) {
+    $id = $_POST['id'];
+    $query = 'SELECT * FROM notes WHERE id=:id';
+    $note = $db->query($query, ['id' => $id])->findOrFail();
 
-view('notes/show.view.php', [
-    'heading' => 'Note',
-    'note' => $note,
-]);
+    authorize($note['user_id'] === $currentUserId);
+
+    $query = 'DELETE FROM notes WHERE id=:id';
+    $db->query($query, ['id' => $id]);
+
+    header('location: /notes');
+    exit();
+} else {
+    $id = $_GET['id'];
+
+    $query = 'SELECT * FROM notes WHERE id=:id';
+    $note = $db->query($query, ['id' => $id])->findOrFail();
+
+    authorize($note['user_id'] === $currentUserId);
+
+    view('notes/show.view.php', [
+        'heading' => 'Note',
+        'note' => $note,
+    ]);
+}

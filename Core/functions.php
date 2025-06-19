@@ -1,5 +1,7 @@
 <?php
 
+use Core\Response;
+
 function dd($value)
 {
     echo '<pre>';
@@ -19,6 +21,14 @@ function authorize($condition, $status = Response::FORBIDDEN)
     if (!$condition) {
         abort($status);
     }
+}
+
+function abort($code = 404)
+{
+    http_response_code($code);
+    view("{$code}.php");
+
+    exit;
 }
 
 function base_path($path)
