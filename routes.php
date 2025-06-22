@@ -18,3 +18,5 @@ $router->get('/note/edit', 'controllers/notes/edit.php');//show edit form of not
 $router->patch('/note', 'controllers/notes/update.php');//update note after hiiting submit button on edit form
 
 $router->get('/register', 'controllers/registration/create.php');
+
+$router->post('/register', 'controllers/registration/store.php');
