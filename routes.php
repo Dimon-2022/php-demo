@@ -16,3 +16,5 @@ $router->post('/notes', 'controllers/notes/store.php');//store note after hittin
 $router->get('/note/edit', 'controllers/notes/edit.php');//show edit form of note 
 
 $router->patch('/note', 'controllers/notes/update.php');//update note after hiiting submit button on edit form
+
+$router->get('/register', 'controllers/registration/create.php');
