@@ -1,28 +1,28 @@
 <?php
 
-$router->get('/', 'controllers/index.php');
-$router->get('/about', 'controllers/about.php');
-$router->get('/contact', 'controllers/contact.php');
+$router->get('/', 'index.php');
+$router->get('/about', 'about.php');
+$router->get('/contact', 'contact.php');
 
-$router->get('/notes', 'controllers/notes/index.php')->only('auth');//all notes 
-$router->get('/note', 'controllers/notes/show.php');
-$router->delete('/note', 'controllers/notes/destroy.php');//delete note 
-
-
-$router->get('/notes/create', 'controllers/notes/create.php');//show form for creating note
-$router->post('/notes', 'controllers/notes/store.php');//store note after hitting submit button on create form 
+$router->get('/notes', 'notes/index.php')->only('auth');//all notes 
+$router->get('/note', 'notes/show.php');
+$router->delete('/note', 'notes/destroy.php');//delete note 
 
 
-$router->get('/note/edit', 'controllers/notes/edit.php');//show edit form of note 
+$router->get('/notes/create', 'notes/create.php');//show form for creating note
+$router->post('/notes', 'notes/store.php');//store note after hitting submit button on create form 
 
-$router->patch('/note', 'controllers/notes/update.php');//update note after hiiting submit button on edit form
 
-$router->get('/register', 'controllers/registration/create.php')->only('guest');
+$router->get('/note/edit', 'notes/edit.php');//show edit form of note 
 
-$router->post('/register', 'controllers/registration/store.php')->only('guest');
+$router->patch('/note', 'notes/update.php');//update note after hiiting submit button on edit form
 
-$router->get('/login', 'controllers/session/create.php')->only('guest');
+$router->get('/register', 'registration/create.php')->only('guest');
 
-$router->post('/session', 'controllers/session/store.php')->only('guest');
+$router->post('/register', 'registration/store.php')->only('guest');
 
-$router->delete('/session', 'controllers/session/destroy.php')->only('auth');
+$router->get('/login', 'session/create.php')->only('guest');
+
+$router->post('/session', 'session/store.php')->only('guest');
+
+$router->delete('/session', 'session/destroy.php')->only('auth');

@@ -32,6 +32,7 @@ $user = $db->query('SELECT * FROM users WHERE email=:email', [
     'email' => $email,
 ])->find();
 
+
 if ($user) {
     // if yes, redirect to login page
     header('location: /');
@@ -39,14 +40,17 @@ if ($user) {
 } else {
     // if not, save one to the database, and then log the user in,  and redirect
 
+
+ 
     $user = $db->query('INSERT INTO users (password, email) VALUES (:password, :email)', [
         'password' => password_hash($password, PASSWORD_BCRYPT),
         'email' => $email,
     ]);
 
+
     // mark that the user has logged in
 
-    // login($user);
+    //login($user);
 
     header('location: /');
     exit;
