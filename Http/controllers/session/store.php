@@ -1,48 +1,30 @@
 <?php
 
-use Core\App;
-use Core\Database;
-use Core\Validator;
+use Core\Authenticator;
+use Core\Session;
 use Http\Forms\LoginForm;
 
-$db = App::resolve(Database::class);
-
+// receive credentials
 $email = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
 
 $form = new LoginForm();
 
-if(!$form->validate($email, $password)){
-        return view('sessions/create.view.php', [
-        'errors' => $form->errors(),
-    ]);
-}
+if ($form->validate($email, $password)) {
+    $auth = new Authenticator();
 
-if (!empty($errors)) {
-    return view('sessions/create.view.php', [
-        'errors' => $errors,
-    ]);
-}
-
-$user = $db->query('SELECT * FROM users WHERE email = :email', [
-    'email' => $email,
-])->find();
-
-if (!$user) {
-    if (password_verify($password, $user['password'])) {
-        login([
-            'email' => $email,
-        ]);
-        header('location: /');
-        exit;
+    if ($auth->attempt($email, $password)) {
+        redirect('/');
+    } else {
+        $form->error('email', 'No matching account found for that email adress and password');
     }
 }
 
-return view('session/create.view.php',
+Session::flash('errors', $form->errors());
+Session::flash('old',
     [
-        'errors' => [
-            'email' => 'No matching account found for that email adress and password',
-        ],
-    ]);
+        'email' => $email,
+    ]
+);
 
-dd('Submit the form');
+return redirect('/login');
